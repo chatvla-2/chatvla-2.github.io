@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="DESCRIPTION META TAG">
+  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
+  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>ChatVLA-2: Vision-Language-Action Model with Open-World Reasoning from Pretrained Knowledge</title>
+  <link rel="icon" type="image/x-icon" href="static/images/icon.jpg">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+
+    <!-- Splide CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/splidejs/3.6.12/css/splide.min.css">
+    <link rel="stylesheet" href="components/carousel-component.css">
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('header.html')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.text();
+        })
+        .then(html => {
+          document.getElementById('header').innerHTML = html;
+        })
+        .catch(error => {
+          console.error('Error loading header:', error);
+        });
+    });
+
+</script>
+<script src="components/carousel-component.js"></script>
+<script>
+
+const videoData = {
+    carousel1: [
+        { video: "static/videos/math/web_story_1.mp4", label: "", speed: "" },
+        { video: "static/videos/math/web_story_2.mp4", label: "", speed: "" },
+        { video: "static/videos/math/web_story_3.mp4", label: "", speed: "" },
+    ]
+    // carousel2: [
+    //     { video: "static/videos/other/2-1.mp4", label: "Bread -> plate", speed: "4x" },
+    // ],
+    // carousel3: [
+    //     { video: "static/videos/other/3-1.mp4", label: "Bread -> empty plate", speed: "4x" },
+    // ]
+};
+
+  document.addEventListener('DOMContentLoaded', function () {
+    new VideoCarousel('#carousel1', videoData.carousel1, {}, true);
+    // new VideoCarousel('#carousel2', videoData.carousel2, {}, true);
+    // new VideoCarousel('#carousel3', videoData.carousel3, {}, true);
+
+
+  });
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+<!--    <div id="header">-->
+<!--        &lt;!&ndash; header.html 将被加载到这里 &ndash;&gt;-->
+<!--    </div>-->
+
+  <section class="hero" style="padding-top: 0%;">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+
+            <h1 class="title is-1 publication-title" style="display: flex; align-items: center;">
+              <span style="margin-left: 1rem;">ChatVLA-2: Vision-Language-Action Model with Open-World Reasoning from Pretrained Knowledge</span>
+            </h1>
+              <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="px-2"> Zhongyi Zhou*<sup>,1,2</sup> </span>
+              <span class="px-2"> Yichen Zhu*<sup>,†,1</sup> </span>
+              <span class="px-2"> Junjie Wen<sup>2</sup> </span>
+              <span class="px-2">Chaomin Shen<sup>2</sup></span>
+              <span class="px-2">Yi Xu<sup>1</sup></span>
+
+                  </div>
+
+                  <div class="is-size-5 publication-authors">
+                    <span style="color: rgb(145, 143, 143);" class="px-4">1. Midea Group</span>
+                    <span style="color: rgb(145, 143, 143);" class="px-4">2. East China Normal University</span>
+                    <span style="color: rgb(106, 101, 101);" class="eql-cntrb"><small><br><sup>*</sup>Equal Contribution.</small></span>
+                    <span style="color: rgb(106, 101, 101);" class="eql-cntrb"><small><br><sup>†</sup>Corresponding author.</small></span>
+
+                  </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                         <!-- Arxiv PDF link -->
+                      <span class="link-block">
+                        <a href="https://arxiv.org/pdf/2502.14420" target=""
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
+
+
+<!--                  &lt;!&ndash; Github link &ndash;&gt;-->
+<!--                  <span class="link-block">-->
+<!--                    <a href="https://chatvla.github.io"-->
+<!--                       class="external-link button is-normal is-rounded is-dark">-->
+<!--                        <span class="icon">-->
+<!--                            <i class="fab fa-github"></i>-->
+<!--                        </span>-->
+<!--                        <span>code</span>-->
+<!--                    </a>-->
+<!--                </span>-->
+<!--                -->
+
+                <!-- ArXiv abstract Link -->
+                  <span class="link-block">
+                    <a href="https://arxiv.org/abs/2502.14420" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                    </a>
+                  </span>
+                  <span class="link-block">
+                    <a href="https://chatvla.github.io/" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+<!--                    <span class="icon">-->
+<!--                      <i class="ai ai-arxiv"></i>-->
+<!--                    </span>-->
+                    <span>ChatVLA-1</span>
+                    </a>
+                  </span>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Teaser video-->
+<section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <video poster="" id="tree" autoplay muted loop style="
+          width: 1000px;
+          height: auto;  /* 设置固定高度 */
+          object-fit: cover;  /* 覆盖模式,会裁剪掉多余部分 */
+          object-position: center;  /* 居中裁剪 */
+        ">
+          <source src="static/videos/ChatVLA-2_demo.mp4" type="video/mp4">
+        </video>
+<!--        <img src="static/images/chatvla_framework_1.jpg" alt="teaser" style="-->
+<!--          width: auto;           -->
+<!--          max-width: 80%;-->
+<!--          height: auto;          -->
+<!--          margin: 0 auto;        -->
+<!--          display: block;       -->
+<!--          border-radius: 8px;    -->
+<!--        "/>-->
+      </div>
+    </div>
+</section>
+  <!-- End teaser video -->
+
+
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <img style="width: 75%; margin: 20px auto; display: block;" src="static/images/2_first.png" alt="abstract image" />
+        <div class="content has-text-justified">
+          <p> We propose <span class="method-name">ChatVLA-2</span>, a novel VLA model <strong>enables generalized open-world reasoning and reasoning following abilities</strong>.</p>
+            <p>
+              We argue that a generalizable VLA model should retain and expand upon the VLM's core competencies:
+              1) <strong>Open-world reasoning</strong> - the VLA should inherit the knowledge from VLM, i.e.,
+              recognize anything that the VLM can recognize, capable of solving math problems, possessing visual-spatial intelligence,
+              2) <strong>Reasoning following</strong> – effectively translating the open-world reasoning into actionable steps for the robot.
+              In this work, we introduce <span class="method-name">ChatVLA-2</span>, a novel mixture-of-expert VLA model coupled with a specialized three-stage training pipeline
+              designed to preserve the VLM's original strengths while enabling actionable reasoning.
+            </p>
+            <p>
+              To validate our approach, we design a math-matching task wherein a robot interprets math problems written on a whiteboard and picks corresponding number cards from a table to solve equations.
+              Remarkably, our method exhibits exceptional mathematical reasoning and OCR capabilities, despite these abilities not being explicitly trained within the VLA.
+              Furthermore, we demonstrate that the VLA possesses strong spatial reasoning skills, enabling it to interpret novel directional instructions involving previously unseen objects.
+              Overall, our method showcases reasoning and comprehension abilities that significantly surpass state-of-the-art imitation learning methods such as OpenVLA, DexVLA, and \(\pi_0\).
+              This work represents a substantial advancement toward developing truly generalizable robotic foundation models endowed with robust reasoning capacities.
+            </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser" style="padding-top: 20px;"></section>
+  <div style="text-align: center; ">
+    <h2 class="title is-3">Open-World Reasoning: Write on whiteboard and ChatVLA-2 can do it!</h2>
+  <h3 style="color:rgb(140, 143, 144);margin-bottom: 10px; font-size: 1.5rem; font-weight: bold;">Unseen number, answer, background and even symbol!</h3>
+    <div id="carousel1"></div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/splidejs/3.6.12/js/splide.min.js"></script>
+</section>
+
+<section class="section">
+  <div class="container is-max-widescreen">
+    <div class="rows">
+      <div class="container has-text-centered">
+        <h2 class="title is-3" style="margin-bottom: 1em;">Demos on Math-Matching Game</h2>
+      </div>
+      <p class="content has-text-justified">
+        Below are examples of math matching game to demonstrate <b>open-world reasoning</b> ability and <b>reasoning-following</b> ability.
+        </p>
+      <p class="has-text-centered">
+        <strong><b>All examples are Out-of-Domain!</b></strong>
+      </p>
+      <div class="columns is-centered is-vcentered">
+        <div class="column is-one-third">
+          <div class="card">
+            <div class="card-content">
+              <b>User</b>: "Answer the question and pick the card with the correct answer." <br><br>
+                <i class="fas fa-check"></i> <b>Unseen number</b><br><br>
+                <i class="fas fa-check"></i> <b>Unseen answer</b><br><br>
+                <i class="fas fa-check"></i> <b>Unseen background</b><br><br>
+
+            </div>
+          </div>
+        </div>
+        <div class="column is-5">
+          <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
+            <source src="/static/videos/math/web_addition.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="columns is-centered is-vcentered">
+        <div class="column is-one-third">
+          <div class="card">
+            <div class="card-content">
+              <b>User</b>: "Answer the question and pick the card with the correct answer." <br><br>
+                <i class="fas fa-check"></i> <b>Unseen number</b><br><br>
+                <i class="fas fa-check"></i> <b>Unseen answer</b><br><br>
+                <i class="fas fa-check"></i> <b>Unseen background</b><br><br>
+                <i class="fas fa-check"></i> <strong>Unseen symbol "-"</strong><br><br>
+
+            </div>
+          </div>
+        </div>
+        <div class="column is-5">
+          <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
+            <source src="/static/videos/math/web_sub.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="columns is-centered is-vcentered">
+        <div class="column is-one-third">
+          <div class="card">
+            <div class="card-content">
+              <b>User</b>: "Answer the question and pick the card with the correct answer." <br><br>
+                <i class="fas fa-check"></i> <b>Unseen number</b><br><br>
+                <i class="fas fa-check"></i> <b>Unseen answer</b><br><br>
+                <i class="fas fa-check"></i> <b>Unseen background</b><br><br>
+                <i class="fas fa-check"></i> <strong>Unseen symbol "×"</strong><br><br>
+
+            </div>
+          </div>
+        </div>
+        <div class="column is-5">
+          <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
+            <source src="/static/videos/math/web_mul.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="columns is-centered is-vcentered">
+        <div class="column is-one-third">
+          <div class="card">
+            <div class="card-content">
+              <b>User</b>: "Answer the question and pick the card with the correct answer." <br><br>
+                <i class="fas fa-check"></i> <b>Unseen number</b><br><br>
+                <i class="fas fa-check"></i> <b>Unseen answer</b><br><br>
+                <i class="fas fa-check"></i> <b>Unseen background</b><br><br>
+                <i class="fas fa-check"></i> <strong>Unseen symbol "÷"</strong><br><br>
+
+            </div>
+          </div>
+        </div>
+        <div class="column is-5">
+          <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
+            <source src="/static/videos/math/web_div.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container is-max-widescreen">
+    <div class="rows">
+      <div class="container has-text-centered">
+        <h2 class="title is-3" style="margin-bottom: 1em;">Demos on Toy Placement Task</h2>
+      </div>
+      <p class="content has-text-justified">
+        Below are examples of toy placement task to demonstrate <b>open-world reasoning</b> ability and <b>reasoning-following</b> ability.
+        </p>
+      <p class="has-text-centered">
+        <strong><b>All examples are Out-of-Domain!</b></strong><br><br>
+        <b>User</b>: <span style="font-size: 1.2em;">"Pick the <strong>[obj]</strong> and place it to <strong>[place]</strong> of the <strong>[target]</strong>"</span> <br><br>
+      </p>
+      <div class="columns is-centered is-vcentered">
+        <div class="column is-one-third">
+          <div class="card">
+            <div class="card-content">
+              
+                <i class="fas fa-check"></i> <b>Unseen object</b><br><br>
+                <i class="fas fa-check"></i> <b>Unseen target</b><br><br>
+                <i class="fas fa-check"></i> <b>Unseen background</b><br><br>
+            </div>
+          </div>
+        </div>
+        <div class="column is-4">
+          <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
+            <source src="/static/videos/toy/web_toy_1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-4">
+          <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
+            <source src="/static/videos/toy/web_toy_2.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="columns is-centered is-vcentered">
+        <div class="column is-one-third">
+          <div class="card">
+            <div class="card-content">
+              
+                <i class="fas fa-check"></i> <b>Unseen object</b><br><br>
+                <i class="fas fa-check"></i> <b>Unseen target</b><br><br>
+                <i class="fas fa-check"></i> <b>Unseen background</b><br><br>
+            </div>
+          </div>
+        </div>
+        <div class="column is-4">
+          <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
+            <source src="/static/videos/toy/web_toy_3.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-4">
+          <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
+            <source src="/static/videos/toy/web_toy_4.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="columns is-centered is-vcentered">
+        <div class="column is-one-third">
+          <div class="card">
+            <div class="card-content">
+              
+                <i class="fas fa-check"></i> <b>Unseen object</b><br><br>
+                <i class="fas fa-check"></i> <b>Unseen target</b><br><br>
+                <i class="fas fa-check"></i> <b>Unseen background</b><br><br>
+                <i class="fas fa-check"></i> <strong>Unseen place </strong><br><br>
+            </div>
+          </div>
+        </div>
+        <div class="column is-4">
+          <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
+            <source src="/static/videos/toy/web_toy_5.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="column is-4">
+          <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
+            <source src="/static/videos/toy/web_toy_6.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero teaser" style="padding-top: 50px;">
+  <div style="text-align: center; ">
+    <h2 class="title is-3" >Model architecture</h2>
+
+  </div>
+  <div class="container is-max-desktop" style="text-align: center;">
+    <div class="hero-body">
+      <h2 class="subtitle has-text-centered">
+        <br>
+        <!-- Evaluation of MLLMs and VLAs on <strong>6 Multimodal Understanding benchmarks and 7 VQA benchmarks</strong>. -->
+      </h2>
+      <img style="width: 60%;height: 100%" src="static/images/2_framework.png" alt="teaser" />
+      <!-- <img style="width: 60%;height: 100%" src="static/images/vqa.png" alt="teaser" /> -->
+
+      <h2 style="text-align: left; margin-left: 10%; margin-right: 10%;">
+        <b>Left:</b> A reasoning-following enhancement module is incorporated to ensure that the VLA model adheres to logical reasoning when performing actions. <br>
+        <b>Right:</b> Our method leverages a dynamic mixture-of-experts architecture to disentangle conflicting features between multimodal understanding and robotic control, while effectively integrating mutually beneficial features.
+      </h2>
+    </div>
+   </div>
+</section>
+<section class="hero teaser" style="padding-top: 50px;">
+  <div style="text-align: center; ">
+    <h2 class="title is-3" >Training Strategy</h2>
+
+  </div>
+  <div class="container is-max-desktop" style="text-align: center;">
+    <div class="hero-body">
+      <h2 class="subtitle has-text-centered">
+        <br>
+        <!-- Evaluation of MLLMs and VLAs on <strong>6 Multimodal Understanding benchmarks and 7 VQA benchmarks</strong>. -->
+      </h2>
+      <img style="width: 60%;height: 100%" src="static/images/2_stage.png" alt="teaser" />
+      <!-- <img style="width: 60%;height: 100%" src="static/images/vqa.png" alt="teaser" /> -->
+
+      <h2 style="text-align: left; margin-left: 10%; margin-right: 10%;">
+        We leverage a two-stage training strategy. In the first stage, we perform co-training on image-text data and robot data to empower VLA with open-world reasoning capabilities. In the second stage, we freeze the entire VLM and train only the action expert, thereby preserving open-world reasoning while enhancing instruction-following abilities in VLA.
+      </h2>
+    </div>
+   </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre>
+    <code>@misc{zhou2025chatvlaunifiedmultimodalunderstanding,
+      title={ChatVLA: Unified Multimodal Understanding and Robot Control with Vision-Language-Action Model},
+      author={Zhongyi Zhou and Yichen Zhu and Minjie Zhu and Junjie Wen and Ning Liu and Zhiyuan Xu and Weibin Meng and Ran Cheng and Yaxin Peng and Chaomin Shen and Feifei Feng},
+      year={2025},
+      eprint={2502.14420},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO},
+      url={https://arxiv.org/abs/2502.14420},
+      }</code></pre>
+  </div>
+</section>
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the  <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
+  <style>
+   
+    video, img {
+        width: 100%;
+        border-radius: 8px;
+    }
+    .wrapper {
+    position: relative;  /* 固定在屏幕上，滚动时不动 */
+    top: 0%;         /* 垂直居中 */
+    left: 40%;        /* 水平居中 */
+    transform: translate(-50%, -50%); /* 调整位置，使得真正居中 */
+    width: 300px;     /* 可以根据需求调整宽度 */
+    padding: 20px;    /* 内边距，给内容一些空间 */
+    }
+    .container {
+        max-width: 80%;
+        margin: auto;
+    }
+    .video-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-bottom: 30px;
+    }
+    .video-item {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 20px; /* 增加每个视频项之间的间距 */
+    }
+    .description {
+        width: 50%;
+        background-color: #ebf8ff;
+        padding: 15px;
+        border-radius: 5px;
+        margin-right: 20px;
+        margin-bottom: 20px; /* 增加描述框之间的间距 */
+    }
+    .video-container {
+        width: 45%;
+        position: relative;
+    }
+    video, img {
+        width: 100%;
+        border-radius: 8px;
+    }
+        .label {
+        position: absolute;
+        padding: 2px 5px;
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 3px;
+        font-size: 12px;
+    }
+    .top-left {
+        top: 5px;
+        left: 5px;
+    }
+    .bottom-right {
+        bottom: 5px;
+        right: 5px;
+    }
+    .method-name {
+    font-style: italic;
+    /* 或者使用特定样式 */
+    color: #3b2c7c;  /* 使用主题色 */
+    font-weight: 500;
+    font-weight: bold;
+}
+
+    strong {
+        font-weight: bold;
+        /* 可选：添加强调色 */
+        color: #3600a2;
+    }
+
+    p {
+        line-height: 1.6;
+        margin-bottom: 1.5em;
+        text-align: justify;
+    }
+    /*设置framework gif的裁剪*/
+    .video-container {
+    max-width: 100%;  /* 调整容器宽度 */
+    margin: auto;
+    }
+
+    .video-container .hero-body {
+        padding: 0;  /* 移除内边距 */
+    }
+
+    .video-container video {
+        width: 100%;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .splide__track {
+        display: flex !important;
+    }
+
+    .splide__list {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        gap: 10px; /* 视频之间的间距 */
+        width: 100% !important;
+        transform: none !important;
+    }
+
+    .splide__slide {
+        flex: 0 0 calc(33% - 8px) !important; /* 4个视频等宽排列,减去间距 */
+        max-width: calc(33% - 8px) !important;
+        position: relative !important;
+    }
+
+    /* 确保视频容器和视频本身填充整个空间 */
+    .video-wrapper {
+        width: 100%;
+        position: relative;
+    }
+
+    .video-wrapper video {
+        width: 100%;
+        height: auto;
+    }
+
+    /* 标签样式调整 */
+    .video-label {
+        position: absolute;
+        bottom: 5px;
+        left: 5px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-size: 12px;
+    }
+
+</style>
+
+   
