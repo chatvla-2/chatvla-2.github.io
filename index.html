@@ -487,41 +487,39 @@ const videoData = {
 
 <section class="hero teaser" style="padding-top: 50px;">
   <div style="text-align: center; ">
-    <h2 class="title is-3" >Model architecture</h2>
+    <h2 class="title is-3" >Results on the math matching game</h2>
 
   </div>
   <div class="container is-max-desktop" style="text-align: center;">
     <div class="hero-body">
       <h2 class="subtitle has-text-centered">
-        <br>
-        <!-- Evaluation of MLLMs and VLAs on <strong>6 Multimodal Understanding benchmarks and 7 VQA benchmarks</strong>. -->
+        <!-- Results on the math matching game. -->
       </h2>
-      <img style="width: 60%;height: 100%" src="static/images/2_framework.png" alt="teaser" />
+      <img style="width: 60%;height: 100%" src="static/images/result_math.png" alt="teaser" />
       <!-- <img style="width: 60%;height: 100%" src="static/images/vqa.png" alt="teaser" /> -->
 
       <h2 style="text-align: left; margin-left: 10%; margin-right: 10%;">
-        <b>Left:</b> A reasoning-following enhancement module is incorporated to ensure that the VLA model adheres to logical reasoning when performing actions. <br>
-        <b>Right:</b> Our method leverages a dynamic mixture-of-experts architecture to disentangle conflicting features between multimodal understanding and robotic control, while effectively integrating mutually beneficial features.
+        We evaluate multiple models on both in-domain settings, where the data is presented in the training data, and open-world setups. 
+        We evaluate average score of <strong>OCR (4 scores in total)</strong> and <strong>mathematical reasoning (2 scores in total)</strong>, and average success rate of task execution at both setups.
       </h2>
     </div>
    </div>
 </section>
 <section class="hero teaser" style="padding-top: 50px;">
   <div style="text-align: center; ">
-    <h2 class="title is-3" >Training Strategy</h2>
+    <h2 class="title is-3" >Results on the toy placement task</h2>
 
   </div>
   <div class="container is-max-desktop" style="text-align: center;">
     <div class="hero-body">
       <h2 class="subtitle has-text-centered">
-        <br>
-        <!-- Evaluation of MLLMs and VLAs on <strong>6 Multimodal Understanding benchmarks and 7 VQA benchmarks</strong>. -->
+        <!-- Results on the toy placement task. -->
       </h2>
-      <img style="width: 60%;height: 100%" src="static/images/2_stage.png" alt="teaser" />
+      <img style="width: 60%;height: 100%" src="static/images/result_spatial.png" alt="teaser" />
       <!-- <img style="width: 60%;height: 100%" src="static/images/vqa.png" alt="teaser" /> -->
 
       <h2 style="text-align: left; margin-left: 10%; margin-right: 10%;">
-        We leverage a two-stage training strategy. In the first stage, we perform co-training on image-text data and robot data to empower VLA with open-world reasoning capabilities. In the second stage, we freeze the entire VLM and train only the action expert, thereby preserving open-world reasoning while enhancing instruction-following abilities in VLA.
+        We evaluate multiple models on both in-domain settings, where the data is presented in the training data, and open-world setups. We evaluate average object recognition score, spatial affordance score and task success rate at both setups.
       </h2>
     </div>
    </div>
