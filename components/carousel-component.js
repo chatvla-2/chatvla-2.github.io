@@ -11,7 +11,7 @@ class VideoCarousel {
     init() {
         const carousel_container = document.createElement('div');
         carousel_container.classList.add('splide');
-        carousel_container.id = 'carousel_container'; // 添加 id
+        carousel_container.id = 'carousel_container';
 
         const track = document.createElement('div');
         track.classList.add('splide__track');
@@ -29,14 +29,17 @@ class VideoCarousel {
             `;
 
             // 如果需要显示 label，则添加 span
-            if (this.show_label) {
+            if (this.show_label && item.label) {
                 videoHTML += `<span class="top-label">${item.label}</span>`;
             }
 
-            videoHTML += `<span class="speed-label">${item.speed}</span>`;
+            // 如果需要显示 speed，则添加 span
+            if (item.speed) {
+                videoHTML += `<span class="speed-label">${item.speed}</span>`;
+            }
+
             li.innerHTML = videoHTML;
             list.appendChild(li);
-
         });
 
         track.appendChild(list);

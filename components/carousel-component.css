@@ -16,48 +16,56 @@
 
     .video-container {
         position: relative;
+        width: 100%;
+        height: 100%;
     }
 
-    .top-label {
+    .video-container video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
+    /* 轮播视频的标签样式 */
+    .splide__slide .top-label {
         position: absolute;
         top: 0.5rem;
         left: 1rem;
-        background: rgba(255, 255, 255, 0.75);
-        color: #58508d;
-        /* font-family: 'SF Pro Display', 'Doto', 'Arial', sans-serif; */
+        background: rgba(140, 143, 144, 0.75);
+        color: white;
         font-weight: 900;
-        font: 1em;
-        padding: 0.2rem;
+        font-size: 1em;
+        padding: 0.2rem 0.5rem;
         border-radius: 0.4rem;
+        z-index: 10;
     }
 
-    .speed-label {
-
+    /* 普通视频的标签样式 */
+    .video-container:not(.splide__slide) .top-label {
         position: absolute;
-        top: 0.5rem;
-        right: 1rem;
-        background: rgba(255, 255, 255, 0.75);
-        color: #58508d;
-        /* font-family: 'SF Pro Display', 'Doto', 'Arial', sans-serif; */
+        bottom: 0.5rem;
+        left: 1rem;
+        background: rgba(140, 143, 144, 0.75);
+        color: white;
         font-weight: 900;
-        font: 1em;
-        padding: 0.2rem;
+        font-size: 1em;
+        padding: 0.2rem 0.5rem;
         border-radius: 0.4rem;
+        z-index: 10;
     }
-    /* .top-speed-label {
 
+    .video-container:not(.splide__slide) .speed-label {
         position: absolute;
-        top: 1rem;
-        right: 1rem;
-        background: rgba(255, 255, 255, 0.75);
-        color: #58508d;
-        font-family: 'SF Pro Display', 'Doto', 'Arial', sans-serif;
+        bottom: 0.5rem;
+        right: 0.7rem;
+        background: rgba(140, 143, 144, 0.75);
+        color: white;
         font-weight: 900;
-        font: 1.2em;
-        padding: 0.5rem;
-        border-radius: 0.5rem;
-    } */
+        font-size: 1em;
+        padding: 0.2rem 0.5rem;
+        border-radius: 0.4rem;
+        z-index: 10;
+    }
 
     /* Container width control */
     #carousel_container {

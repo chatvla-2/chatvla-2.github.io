@@ -71,11 +71,11 @@
 
 const videoData = {
     carousel1: [
-        { video: "static/videos/math/web_story_1.mp4", label: "", speed: "", controls: true, controlsList: "nodownload" },
+        { video: "static/videos/math/web_story_1.mp4", label: "3x", speed: "", controls: true, controlsList: "nodownload" },
     ],
     carousel2: [
-      { video: "static/videos/math/web_story_2.mp4", label: "", speed: "", controls: true, controlsList: "nodownload" },
-      { video: "static/videos/math/web_story_3.mp4", label: "", speed: "", controls: true, controlsList: "nodownload" },
+      { video: "static/videos/math/web_story_2.mp4", label: "3x", speed: "", controls: true, controlsList: "nodownload" },
+      { video: "static/videos/math/web_story_3.mp4", label: "3x", speed: "", controls: true, controlsList: "nodownload" },
     ]
     // carousel3: [
     //     { video: "static/videos/other/3-1.mp4", label: "Bread -> empty plate", speed: "4x" },
@@ -255,7 +255,7 @@ const videoData = {
   <div class="container is-max-widescreen">
     <div class="rows">
       <div class="container has-text-centered">
-        <h2 class="title is-3" style="margin-bottom: 1em;">Demos on Math-Matching Game</h2>
+        <h2 class="title is-3" style="margin-bottom: 1em;">Math Reasoning: Demos on Math-Matching Game</h2>
       </div>
       <p class="content has-text-justified">
         Below are examples of math matching game to demonstrate <b>open-world reasoning</b> ability and <b>reasoning-following</b> ability.
@@ -275,9 +275,13 @@ const videoData = {
           </div>
         </div>
         <div class="column is-5">
-          <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
-            <source src="/static/videos/math/web_addition.mp4" type="video/mp4">
-          </video>
+          <div class="video-container" style="width: 100%; height: 100%;">
+            <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
+              <source src="/static/videos/math/web_addition.mp4" type="video/mp4">
+            </video>
+            <!-- <span class="top-label">5x</span>
+            <span class="speed-label">4x</span> -->
+          </div>
         </div>
       </div>
       <div class="columns is-centered is-vcentered">
@@ -294,9 +298,13 @@ const videoData = {
           </div>
         </div>
         <div class="column is-5">
-          <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
-            <source src="/static/videos/math/web_sub.mp4" type="video/mp4">
-          </video>
+          <div class="video-container" style="width: 100%; height: 100%;">
+            <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
+              <source src="/static/videos/math/web_sub.mp4" type="video/mp4">
+            </video>
+            <!-- <span class="top-label">4x</span>
+            <span class="speed-label">4x</span> -->
+          </div>
         </div>
       </div>
       <div class="columns is-centered is-vcentered">
@@ -313,9 +321,13 @@ const videoData = {
           </div>
         </div>
         <div class="column is-5">
-          <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
-            <source src="/static/videos/math/web_mul.mp4" type="video/mp4">
-          </video>
+          <div class="video-container" style="width: 100%; height: 100%;">
+            <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
+              <source src="/static/videos/math/web_mul.mp4" type="video/mp4">
+            </video>
+            <!-- <span class="top-label">4x</span>
+            <span class="speed-label">3x</span> -->
+          </div>
         </div>
       </div>
       <div class="columns is-centered is-vcentered">
@@ -332,9 +344,13 @@ const videoData = {
           </div>
         </div>
         <div class="column is-5">
-          <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
-            <source src="/static/videos/math/web_div.mp4" type="video/mp4">
-          </video>
+          <div class="video-container" style="width: 100%; height: 100%;">
+            <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
+              <source src="/static/videos/math/web_div.mp4" type="video/mp4">
+            </video>
+            <!-- <span class="top-label">4x</span>
+            <span class="speed-label">3x</span> -->
+          </div>
         </div>
       </div>
 
@@ -347,7 +363,7 @@ const videoData = {
   <div class="container is-max-widescreen">
     <div class="rows">
       <div class="container has-text-centered">
-        <h2 class="title is-3" style="margin-bottom: 1em;">Demos on Toy Placement Task</h2>
+        <h2 class="title is-3" style="margin-bottom: 1em;">Spatial Reasoning: Demos on Toy Placement</h2>
       </div>
       <p class="content has-text-justified">
         Below are examples of toy placement task to demonstrate <b>open-world reasoning</b> ability and <b>reasoning-following</b> ability.
@@ -368,14 +384,20 @@ const videoData = {
           </div>
         </div>
         <div class="column is-4">
-          <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
-            <source src="/static/videos/toy/web_toy_1.mp4" type="video/mp4">
-          </video>
+          <div class="video-container" style="width: 100%; height: 100%;">
+            <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
+              <source src="/static/videos/toy/web_toy_1.mp4" type="video/mp4">
+            </video>
+            <span class="speed-label">2x</span>
+          </div>
         </div>
         <div class="column is-4">
-          <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
-            <source src="/static/videos/toy/web_toy_2.mp4" type="video/mp4">
-          </video>
+          <div class="video-container" style="width: 100%; height: 100%;">
+            <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
+              <source src="/static/videos/toy/web_toy_2.mp4" type="video/mp4">
+            </video>
+            <span class="speed-label">2x</span>
+          </div>
         </div>
       </div>
       <div class="columns is-centered is-vcentered">
@@ -390,14 +412,20 @@ const videoData = {
           </div>
         </div>
         <div class="column is-4">
-          <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
-            <source src="/static/videos/toy/web_toy_3.mp4" type="video/mp4">
-          </video>
+          <div class="video-container" style="width: 100%; height: 100%;">
+            <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
+              <source src="/static/videos/toy/web_toy_3.mp4" type="video/mp4">
+            </video>
+            <span class="speed-label">2x</span>
+          </div>
         </div>
         <div class="column is-4">
-          <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
-            <source src="/static/videos/toy/web_toy_4.mp4" type="video/mp4">
-          </video>
+          <div class="video-container" style="width: 100%; height: 100%;">
+            <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
+              <source src="/static/videos/toy/web_toy_4.mp4" type="video/mp4">
+            </video>
+            <span class="speed-label">2x</span>
+          </div>
         </div>
       </div>
       <div class="columns is-centered is-vcentered">
@@ -413,14 +441,20 @@ const videoData = {
           </div>
         </div>
         <div class="column is-4">
-          <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
-            <source src="/static/videos/toy/web_toy_5.mp4" type="video/mp4">
-          </video>
+          <div class="video-container" style="width: 100%; height: 100%;">
+            <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
+              <source src="/static/videos/toy/web_toy_5.mp4" type="video/mp4">
+            </video>
+            <span class="speed-label">2x</span>
+          </div>
         </div>
         <div class="column is-4">
-          <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
-            <source src="/static/videos/toy/web_toy_6.mp4" type="video/mp4">
-          </video>
+          <div class="video-container" style="width: 100%; height: 100%;">
+            <video width="100%" height="100%" controls controlsList="nodownload" autoplay muted loop>
+              <source src="/static/videos/toy/web_toy_6.mp4" type="video/mp4">
+            </video>
+            <span class="speed-label">2x</span>
+          </div>
         </div>
       </div>
 
