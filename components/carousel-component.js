@@ -22,7 +22,7 @@ class VideoCarousel {
             const li = document.createElement('li');
             li.className = 'splide__slide video-container';
             let videoHTML = `
-                <video muted loop autoplay>
+                <video controls controlsList="nodownload" loop autoplay muted>
                     <source src="${item.video}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>

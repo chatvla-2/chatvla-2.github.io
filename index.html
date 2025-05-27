@@ -71,13 +71,12 @@
 
 const videoData = {
     carousel1: [
-        { video: "static/videos/math/web_story_1.mp4", label: "", speed: "" },
-        { video: "static/videos/math/web_story_2.mp4", label: "", speed: "" },
-        { video: "static/videos/math/web_story_3.mp4", label: "", speed: "" },
+        { video: "static/videos/math/web_story_1.mp4", label: "", speed: "", controls: true, controlsList: "nodownload" },
+    ],
+    carousel2: [
+      { video: "static/videos/math/web_story_2.mp4", label: "", speed: "", controls: true, controlsList: "nodownload" },
+      { video: "static/videos/math/web_story_3.mp4", label: "", speed: "", controls: true, controlsList: "nodownload" },
     ]
-    // carousel2: [
-    //     { video: "static/videos/other/2-1.mp4", label: "Bread -> plate", speed: "4x" },
-    // ],
     // carousel3: [
     //     { video: "static/videos/other/3-1.mp4", label: "Bread -> empty plate", speed: "4x" },
     // ]
@@ -85,7 +84,7 @@ const videoData = {
 
   document.addEventListener('DOMContentLoaded', function () {
     new VideoCarousel('#carousel1', videoData.carousel1, {}, true);
-    // new VideoCarousel('#carousel2', videoData.carousel2, {}, true);
+    new VideoCarousel('#carousel2', videoData.carousel2, {}, true);
     // new VideoCarousel('#carousel3', videoData.carousel3, {}, true);
 
 
@@ -183,7 +182,7 @@ const videoData = {
 
 
 <!-- Teaser video-->
-<section class="hero teaser">
+<!-- <section class="hero teaser">
     <div class="container is-max-desktop">
       <div class="hero-body">
         <video poster="" id="tree" autoplay muted loop style="
@@ -193,7 +192,7 @@ const videoData = {
           object-position: center;  /* 居中裁剪 */
         ">
           <source src="static/videos/ChatVLA-2_demo.mp4" type="video/mp4">
-        </video>
+        </video> -->
 <!--        <img src="static/images/chatvla_framework_1.jpg" alt="teaser" style="-->
 <!--          width: auto;           -->
 <!--          max-width: 80%;-->
@@ -202,9 +201,9 @@ const videoData = {
 <!--          display: block;       -->
 <!--          border-radius: 8px;    -->
 <!--        "/>-->
-      </div>
+      <!-- </div>
     </div>
-</section>
+</section> -->
   <!-- End teaser video -->
 
 
@@ -215,8 +214,8 @@ const videoData = {
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <img style="width: 75%; margin: 20px auto; display: block;" src="static/images/2_first.png" alt="abstract image" />
+        <!-- <h2 class="title is-3">Abstract</h2> -->
+        <img style="width: 80%; margin: 20px auto; display: block;" src="static/images/2_first.png" alt="abstract image" />
         <div class="content has-text-justified">
           <p> We propose <span class="method-name">ChatVLA-2</span>, a novel VLA model <strong>enables generalized open-world reasoning and reasoning following abilities</strong>.</p>
             <p>
@@ -243,8 +242,11 @@ const videoData = {
 <section class="hero teaser" style="padding-top: 20px;"></section>
   <div style="text-align: center; ">
     <h2 class="title is-3">Open-World Reasoning: Write on whiteboard and ChatVLA-2 can do it!</h2>
-  <h3 style="color:rgb(140, 143, 144);margin-bottom: 10px; font-size: 1.5rem; font-weight: bold;">Unseen number, answer, background and even symbol!</h3>
+  <h3 style="color:rgb(140, 143, 144);margin-bottom: 10px; font-size: 1.5rem; font-weight: bold; margin-top: 20px;">Solving Sequential Tasks</h3>
     <div id="carousel1"></div>
+    <h3 style="color:rgb(140, 143, 144);margin-bottom: 10px; font-size: 1.5rem; font-weight: bold;margin-top: 30px;">Unseen number, answer, background and even symbol!</h3>
+  
+    <div id="carousel2" style="margin-top: 30px;"></div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/splidejs/3.6.12/js/splide.min.js"></script>
 </section>
@@ -257,9 +259,8 @@ const videoData = {
       </div>
       <p class="content has-text-justified">
         Below are examples of math matching game to demonstrate <b>open-world reasoning</b> ability and <b>reasoning-following</b> ability.
-        </p>
-      <p class="has-text-centered">
-        <strong><b>All examples are Out-of-Domain!</b></strong>
+      <!-- <p class="has-text-centered"> -->
+        <b>All examples are <strong>NOT</strong> in training data.</b>
       </p>
       <div class="columns is-centered is-vcentered">
         <div class="column is-one-third">
@@ -350,9 +351,9 @@ const videoData = {
       </div>
       <p class="content has-text-justified">
         Below are examples of toy placement task to demonstrate <b>open-world reasoning</b> ability and <b>reasoning-following</b> ability.
-        </p>
+        <b>All examples are <strong>NOT</strong> in training data.</b>  
+      </p>
       <p class="has-text-centered">
-        <strong><b>All examples are Out-of-Domain!</b></strong><br><br>
         <b>User</b>: <span style="font-size: 1.2em;">"Pick the <strong>[obj]</strong> and place it to <strong>[place]</strong> of the <strong>[target]</strong>"</span> <br><br>
       </p>
       <div class="columns is-centered is-vcentered">
@@ -429,7 +430,26 @@ const videoData = {
   </div>
 </section>
 
+<section class="hero teaser" style="padding-top: 50px;">
+  <div style="text-align: center; ">
+    <h2 class="title is-3" >Experimental Setup</h2>
 
+  </div>
+  <div class="container is-max-desktop" style="text-align: center;">
+    <div class="hero-body">
+      <h2 class="subtitle has-text-centered">
+        <br>
+        <!-- Evaluation of MLLMs and VLAs on <strong>6 Multimodal Understanding benchmarks and 7 VQA benchmarks</strong>. -->
+      </h2>
+      <img style="width: 60%;height: 100%" src="static/images/2_task.png" alt="teaser" />
+      <!-- <img style="width: 60%;height: 100%" src="static/images/vqa.png" alt="teaser" /> -->
+
+      <h2 style="text-align: left; margin-left: 10%; margin-right: 10%;">
+        We use a Franka Emika robot equipped with a Robotiq gripper to pick and place items at specified target locations. We utilize the ARX R5 bimanual robots with a top camera of RealSense L515.
+      </h2>
+    </div>
+   </div>
+</section>
 
 <section class="hero teaser" style="padding-top: 50px;">
   <div style="text-align: center; ">
@@ -521,6 +541,30 @@ const videoData = {
     video, img {
         width: 100%;
         border-radius: 8px;
+    }
+    /* 添加视频控制栏样式 */
+    video::-webkit-media-controls {
+        display: flex !important;
+        opacity: 1 !important;
+    }
+    video::-webkit-media-controls-panel {
+        display: flex !important;
+        opacity: 1 !important;
+    }
+    video::-webkit-media-controls-enclosure {
+        display: flex !important;
+        opacity: 1 !important;
+    }
+    /* 确保控制栏在视频上可见 */
+    video {
+        position: relative;
+    }
+    video::-webkit-media-controls-panel {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0);
     }
     .wrapper {
     position: relative;  /* 固定在屏幕上，滚动时不动 */
@@ -626,8 +670,8 @@ const videoData = {
     }
 
     .splide__slide {
-        flex: 0 0 calc(33% - 8px) !important; /* 4个视频等宽排列,减去间距 */
-        max-width: calc(33% - 8px) !important;
+        flex: 0 0 calc(40% - 8px) !important; /* 4个视频等宽排列,减去间距 */
+        max-width: calc(40% - 8px) !important;
         position: relative !important;
     }
 
